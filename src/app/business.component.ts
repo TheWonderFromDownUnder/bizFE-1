@@ -19,6 +19,8 @@ export class BusinessComponent {
   map_options: google.maps.MapOptions = {};
   map_locations: any[] = [ ];
   loremIpsum: any;
+  temperature: any;
+  weather: any;
 
   constructor( public dataService: DataService, private route: ActivatedRoute) {}
 
@@ -37,5 +39,16 @@ export class BusinessComponent {
           .subscribe((response: any) => {
             this.loremIpsum = response.text.slice(0,400);
         });
+        this.dataService.getCurrentWeather(
+          this.business_lat, this.business_lng)
+  .subscribe((response: any) => {
+      let weatherResponse =
+          response['weather'][0]['description'];
+      this.temperature =
+          Math.round((response['main']['temp']));
+      this.weather =
+          weatherResponse[0].toUpperCase() +
+          weatherResponse.slice(1);
+  });
   }
 }

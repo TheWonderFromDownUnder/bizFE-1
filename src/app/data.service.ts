@@ -41,4 +41,14 @@ export class DataService {
                { headers: { 'X-Api-Key': API_key } }
     );
   }
+
+  getCurrentWeather(lat: number, lon: number) {
+
+    let API_key = "be3a137219b82ec4d82b45f5faad37a4";
+    return this.http.get<any>(
+               'https://api.openweathermap.org/data/2.5/' +
+         'weather?lat=' + lat +
+         '&lon=' + lon + '&units=metric&appid=' +
+         API_key);
+}
 }
