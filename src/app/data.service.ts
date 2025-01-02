@@ -51,4 +51,12 @@ export class DataService {
          '&lon=' + lon + '&units=metric&appid=' +
          API_key);
 }
+
+getTemperatureColour(temp: number) {
+  if (temp <= 5) return "#0000ff";
+  else if (temp <= 12) return "#00ff00";
+  else if (temp <= 17) return "#ffff00";
+  else if (temp <= 25) return "#ff7f00";
+  else return "#ff0000"
+}
 }

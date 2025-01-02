@@ -21,6 +21,8 @@ export class BusinessComponent {
   loremIpsum: any;
   temperature: any;
   weather: any;
+  weatherIcon: any;
+  weatherIconURL: any
 
   constructor( public dataService: DataService, private route: ActivatedRoute) {}
 
@@ -49,6 +51,11 @@ export class BusinessComponent {
       this.weather =
           weatherResponse[0].toUpperCase() +
           weatherResponse.slice(1);
+      this.weatherIcon =
+          response['weather'][0]['icon'];
+      this.weatherIconURL =
+          "https://openweathermap.org/img/wn/" +
+      this.weatherIcon + "@4x.png";
   });
   }
 }
