@@ -35,7 +35,7 @@ export class BusinessComponent {
       };
       this.dataService.getLoremIpsum(1)
           .subscribe((response: any) => {
-              console.log(response.text);
+            this.loremIpsum = response.text.slice(0,400);
         });
   }
 }
