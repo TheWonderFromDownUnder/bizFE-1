@@ -22,7 +22,8 @@ export class BusinessComponent {
   temperature: any;
   weather: any;
   weatherIcon: any;
-  weatherIconURL: any
+  weatherIconURL: any;
+  temperatureColour: any;
 
   constructor( public dataService: DataService, private route: ActivatedRoute) {}
 
@@ -56,6 +57,9 @@ export class BusinessComponent {
       this.weatherIconURL =
           "https://openweathermap.org/img/wn/" +
       this.weatherIcon + "@4x.png";
+      this.temperatureColour =
+      this.dataService.getTemperatureColour(
+           this.temperature)
   });
   }
 }
