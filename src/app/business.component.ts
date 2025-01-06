@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'business',
@@ -28,7 +29,9 @@ export class BusinessComponent {
   temperatureColour: any;
   reviewForm: any;
 
-  constructor( public dataService: DataService, private route: ActivatedRoute, private formBuilder: FormBuilder) {}
+  constructor( public dataService: DataService, private route: ActivatedRoute, private formBuilder: FormBuilder,
+    public authService: AuthService
+  ) {}
 
   ngOnInit() {
       this.reviewForm = this.formBuilder.group( {
