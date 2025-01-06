@@ -29,6 +29,7 @@ export class BusinessComponent {
   weatherIconURL: any;
   temperatureColour: any;
   reviewForm: any;
+  review_list: any;
 
   constructor( public dataService: DataService, private route: ActivatedRoute, private formBuilder: FormBuilder,
     public authService: AuthService, private webService: WebService) {}
@@ -75,13 +76,24 @@ export class BusinessComponent {
            this.temperature)
   });
   });
+    this.webService.getReviews(this.route.snapshot.paramMap.get('id'))
+    .subscribe( (response) => {this.review_list = response;
+  });
   }
 
   onSubmit() {
-    this.dataService.postReview(
+    this.webService.postReview(
       this.route.snapshot.paramMap.get('id'),
-      this.reviewForm.value);
-this.reviewForm.reset();
+      this.reviewForm.value)
+      .subscribe( (response) => {
+      this.reviewForm.reset();
+
+      this.webService.getReviews(
+        this.route.snapshot.paramMap.get('id'))
+             .subscribe( (response) => {
+                  this.review_list = response;
+        });
+    });
   }
 
   isInvalid(control: any) {
