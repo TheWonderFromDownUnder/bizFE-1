@@ -3,11 +3,13 @@ import { RouterOutlet, ActivatedRoute } from '@angular/router';
 import { DataService } from './data.service';
 import { CommonModule } from '@angular/common';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'business',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, GoogleMapsModule],
+  imports: [RouterOutlet, CommonModule, GoogleMapsModule, ReactiveFormsModule],
   providers: [DataService],
   templateUrl: './business.component.html',
   styleUrl: './business.component.css'
@@ -24,10 +26,16 @@ export class BusinessComponent {
   weatherIcon: any;
   weatherIconURL: any;
   temperatureColour: any;
+  reviewForm: any;
 
-  constructor( public dataService: DataService, private route: ActivatedRoute) {}
+  constructor( public dataService: DataService, private route: ActivatedRoute, private formBuilder: FormBuilder) {}
 
   ngOnInit() {
+      this.reviewForm = this.formBuilder.group( {
+        username: '',
+        comment: '',
+        stars: 5
+      })
       this.business_list = this.dataService.getBusiness(this.route.snapshot.paramMap.get('id'));
       console.log(this.business_list[0]['reviews']);
       this.business_lat = this.business_list[0].location.coordinates[0];
@@ -62,5 +70,9 @@ export class BusinessComponent {
       this.dataService.getTemperatureColour(
            this.temperature)
   });
+  }
+
+  onSubmit() {
+    console.log(this.reviewForm.value);
   }
 }
