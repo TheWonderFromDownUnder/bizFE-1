@@ -6,12 +6,13 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '@auth0/auth0-angular';
+import { WebService } from './web.service';
 
 @Component({
   selector: 'business',
   standalone: true,
   imports: [RouterOutlet, CommonModule, GoogleMapsModule, ReactiveFormsModule],
-  providers: [DataService],
+  providers: [DataService, WebService],
   templateUrl: './business.component.html',
   styleUrl: './business.component.css'
 })
@@ -30,8 +31,7 @@ export class BusinessComponent {
   reviewForm: any;
 
   constructor( public dataService: DataService, private route: ActivatedRoute, private formBuilder: FormBuilder,
-    public authService: AuthService
-  ) {}
+    public authService: AuthService, private webService: WebService) {}
 
   ngOnInit() {
       this.reviewForm = this.formBuilder.group( {
@@ -39,7 +39,8 @@ export class BusinessComponent {
         comment: ['', Validators.required],
         stars: 5
       })
-      this.business_list = this.dataService.getBusiness(this.route.snapshot.paramMap.get('id'));
+      this.webService.getBusiness( this.route.snapshot.paramMap.get('id'))
+        .subscribe( (response: any)  => { this.business_list = [response];
       console.log(this.business_list[0]['reviews']);
       this.business_lat = this.business_list[0].location.coordinates[0];
       this.business_lng = this.business_list[0].location.coordinates[1];
@@ -72,6 +73,7 @@ export class BusinessComponent {
       this.temperatureColour =
       this.dataService.getTemperatureColour(
            this.temperature)
+  });
   });
   }
 

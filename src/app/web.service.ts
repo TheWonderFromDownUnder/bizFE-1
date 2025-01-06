@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 
+
 @Injectable()
 export  class WebService{
 
@@ -12,5 +13,10 @@ export  class WebService{
         return this.http.get<any>(
             'http://localhost:5000/api/v1.0/businesses?pn=' +
              page + '&ps=' + this.pageSize);
+    }
+
+    getBusiness(id: any) {
+      return this.http.get<any>(
+          'http://localhost:5000/api/v1.0/businesses/' + id);
     }
 }

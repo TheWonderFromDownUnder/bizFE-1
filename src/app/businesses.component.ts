@@ -45,10 +45,10 @@ export class BusinessesComponent {
     if (this.page < this.dataService.getLastPageNumber())
     this.page = this.page + 1
     sessionStorage["page"] = this.page;
-    this.webService.getBusinesses(this.page)
-    .subscribe((response: any) => {
-       this.business_list = response;
-    })
+                this.webService.getBusinesses(this.page)
+            .subscribe((response: any) => {
+               this.business_list = response;
+            })
   }
 
 /*  business_list =  [
