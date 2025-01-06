@@ -6,30 +6,6 @@
 	"town": "Ballymena",
 	"rating": 3,
 	"reviews": [
-		{
-			"_id": {
-				"$oid": "67125a81c814ff5c7d690c86"
-			},
-			"username": "coolguy",
-			"comment": "Goodest!",
-			"stars": "4"
-		},
-		{
-			"_id": {
-				"$oid": "671c4825c7ef720082762d3b"
-			},
-			"username": "mr. bossman",
-			"comment": "Finest!",
-			"stars": "5"
-		},
-		{
-			"_id": {
-				"$oid": "671d6a0034c5d80cce3ef7d0"
-			},
-			"username": "mr. dark",
-			"comment": "Perfect!",
-			"stars": "5"
-		}
 	],
 	"num_employees": 58,
 	"profit": [
@@ -61,7 +37,8 @@
 	"name": "Biz 1",
 	"town": "Enniskillen",
 	"rating": 4,
-	"reviews": [],
+	"reviews": [
+  ],
 	"num_employees": 26,
 	"profit": [
 		{
@@ -92,7 +69,8 @@
 	"name": "Biz 0",
 	"town": "Belfast",
 	"rating": 4,
-	"reviews": [],
+	"reviews": [
+  ],
 	"num_employees": 86,
 	"profit": [
 		{
@@ -3255,14 +3233,6 @@
 	"town": "Belfast",
 	"rating": "3",
 	"reviews": [
-		{
-			"_id": {
-				"$oid": "6726fab493b2089ddffb8419"
-			},
-			"username": "Test User",
-			"comment": "Test Reviews",
-			"stars": "3"
-		}
 	]
 },
 {
@@ -3282,14 +3252,6 @@
 	"town": "York Street",
 	"rating": "4",
 	"reviews": [
-		{
-			"_id": {
-				"$oid": "6727a536c4731ad677c5450a"
-			},
-			"username": "Test User",
-			"comment": "Test Reviews",
-			"stars": "3"
-		}
 	]
 },
 {
@@ -3300,14 +3262,6 @@
 	"town": "Belfast",
 	"rating": "3",
 	"reviews": [
-		{
-			"_id": {
-				"$oid": "6727c325eba71c7cc7f45b5b"
-			},
-			"username": "Test User",
-			"comment": "Test Reviews",
-			"stars": "3"
-		}
 	]
 },
 {

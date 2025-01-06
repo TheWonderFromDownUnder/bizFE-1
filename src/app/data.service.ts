@@ -50,13 +50,49 @@ export class DataService {
          'weather?lat=' + lat +
          '&lon=' + lon + '&units=metric&appid=' +
          API_key);
-}
+  }
 
-getTemperatureColour(temp: number) {
-  if (temp <= 5) return "#0000ff";
-  else if (temp <= 12) return "#00ff00";
-  else if (temp <= 17) return "#ffff00";
-  else if (temp <= 25) return "#ff7f00";
-  else return "#ff0000"
-}
-}
+  getTemperatureColour(temp: number) {
+    if (temp <= 5) return "#0000ff";
+    else if (temp <= 12) return "#00ff00";
+    else if (temp <= 17) return "#ffff00";
+    else if (temp <= 25) return "#ff7f00";
+    else return "#ff0000"
+  }
+
+  populateReviews() {
+
+    let loremIpsum = <String>"";
+    let dummyReview = <any>{};
+
+    this.getLoremIpsum(1).subscribe({
+      next: (response: any) => {
+        const loremIpsum = response.text;
+
+        jsonData.forEach((business) => {
+          let tempReviews: any[] = []; // Temporary array for storing reviews
+          let numReviews = Math.floor(Math.random() * 10);
+
+          for (let i = 0; i < numReviews; i++) {
+            let textSize = Math.floor(Math.random() * 290 + 10);
+            let textStart = Math.floor(Math.random() * Math.max(0, loremIpsum.length - textSize));
+
+            const dummyReview = {
+              username: 'User ' + Math.floor(Math.random() * 9999 + 1),
+              comment: loremIpsum.slice(textStart, textStart + textSize),
+              stars: Math.floor(Math.random() * 5) + 1
+            };
+
+            tempReviews.push(dummyReview); // Add the review to the temporary array
+          }
+
+          // After generating all reviews, assign them to the "reviews" property
+          // business['reviews'] = tempReviews;
+        });
+      },
+      error: (err: any) => {
+        console.error('Failed to fetch lorem ipsum:', err);
+      }
+    });
+  }
+ }

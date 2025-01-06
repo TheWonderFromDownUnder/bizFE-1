@@ -29,6 +29,7 @@ export class BusinessComponent {
 
   ngOnInit() {
       this.business_list = this.dataService.getBusiness(this.route.snapshot.paramMap.get('id'));
+      console.log(this.business_list[0]['reviews']);
       this.business_lat = this.business_list[0].location.coordinates[0];
       this.business_lng = this.business_list[0].location.coordinates[1];
       this.map_locations.push( {  lat: this.business_lat, lng: this.business_lng });
