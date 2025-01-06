@@ -4,7 +4,7 @@ import { DataService } from './data.service';
 import { CommonModule } from '@angular/common';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'business',
@@ -32,8 +32,8 @@ export class BusinessComponent {
 
   ngOnInit() {
       this.reviewForm = this.formBuilder.group( {
-        username: '',
-        comment: '',
+        username: ['', Validators.required],
+        comment: ['', Validators.required],
         stars: 5
       })
       this.business_list = this.dataService.getBusiness(this.route.snapshot.paramMap.get('id'));
@@ -73,6 +73,22 @@ export class BusinessComponent {
   }
 
   onSubmit() {
-    console.log(this.reviewForm.value);
+    console.log(this.reviewForm.valid);
   }
+
+  isInvalid(control: any) {
+    return this.reviewForm.controls[control].invalid &&
+           this.reviewForm.controls[control].touched;
+ }
+
+ isUntouched() {
+  return this.reviewForm.controls.username.pristine ||
+         this.reviewForm.controls.comment.pristine;
+}
+
+isIncomplete() {
+  return this.isInvalid('username') ||
+         this.isInvalid('comment') ||
+         this.isUntouched();
+}
 }
