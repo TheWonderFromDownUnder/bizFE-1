@@ -95,4 +95,18 @@ export class DataService {
       }
     });
   }
+
+  postReview(id: any, review: any) {
+    let tempReviews: any[] = [];
+    let newReview = {
+        'username' : review.username,
+        'comment' : review.comment,
+        'stars' : review.stars
+    };
+    jsonData.forEach( function(business) {
+        if ( business['_id']['$oid'] == id ) {
+          tempReviews.push( newReview );
+        }
+    });
+}
  }
